@@ -12,7 +12,39 @@
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
+        
     <body class="bg-primary">
+        
+        <?php
+        /*
+        require_once 'vendor/autoload.php';
+
+        // init configuration
+        $clientID = '';  //your client ID
+        $clientSecret = '';    //your client secret
+        $redirectUri = 'http://localhost/google-login/';
+
+        // create Client Request to access Google API
+        $client = new Google_Client();
+        $client->setClientId($clientID);
+        $client->setClientSecret($clientSecret);
+        $client->setRedirectUri($redirectUri);
+        $client->addScope("email");
+        $client->addScope("profile");
+
+        // authenticate code from Google OAuth Flow
+        if (isset($_GET['code'])) {
+        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+        $client->setAccessToken($token['access_token']);
+
+        // get profile info
+        $google_oauth = new Google_Service_Oauth2($client);
+        $google_account_info = $google_oauth->userinfo->get();
+        $email =  $google_account_info->email;
+        $name =  $google_account_info->name;
+        */
+        ?>
+
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -24,16 +56,20 @@
                                     <div class="card-header justify-content-center"><h3 class="fw-light my-4">Login</h3></div>
                                     <div class="card-body">
                                         <!-- Login form-->
-                                        <form method="post" action="login.php">
+                                        <form action="login.php" method="post">
 
                                             <?php if (isset($_GET['error'])) { ?>
-     		                                    <p class="error"><?php echo $_GET['error']; ?></p>
-     	                                    <?php } ?>
+                                                <p class="error"><?php echo $_GET['error']; ?></p>
+                                            <?php } ?>
+
+                                            <?php if (isset($_GET['success'])) { ?>
+                                                <p class="success"><?php echo $_GET['success']; ?></p>
+                                            <?php } ?>
 
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" name="uname" id="inputEmailAddress" type="text" placeholder="Enter username" />
+                                                <label class="small mb-1" for="inputUsername">Username</label>
+                                                <input class="form-control" name="uname" id="inputUsername" type="text" placeholder="Enter username" />
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
@@ -50,12 +86,12 @@
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="auth-password-basic.html">Forgot Password?</a>
-                                                <button type="submit" name="submit" value="Login" class="btn btn-primary">Login</a>
+                                                <button class="btn btn-primary">Login</button>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="auth-register-basic.html">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="signup.php">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +103,7 @@
                 <footer class="footer-admin mt-auto footer-dark">
                     <div class="container-xl px-4">
                         <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                            <div class="col-md-6 small">Copyright &copy; System Management 2024</div>
                             <div class="col-md-6 text-md-end small">
                                 <a href="#!">Privacy Policy</a>
                                 &middot;
